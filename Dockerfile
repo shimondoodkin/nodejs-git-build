@@ -2,6 +2,7 @@ FROM node:16
 
 ENV GITURL "https://github.com/shimondoodkin/simple-nodejs-app-with-build.git"
 ENV GITBRANCH "main"
+ENV APPDESTINATION "/app"
 ENV RESET ""
 
 ENV BUILD1 "npm install"
