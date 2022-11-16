@@ -6,6 +6,7 @@ set +e
 
 [ -z "${GITURL}"    ] && export GITURL="https://github.com/shimondoodkin/simple-nodejs-app-with-build.git"
 [ -z "${GITBRANCH}" ] && export GITBRANCH="main"
+[ -z "${APPDESTINATION}" ] && export APPDESTINATION="/app"
 [ -z "${RESET}"     ] && export RESET=""
 
 [ -z "${BUILD1}"  ] && export BUILD1="yarn install"
@@ -45,19 +46,20 @@ set +e
 
 
 if [ ! -z "${RESET}" ]; then
-   echo RESET enviorment variable specified, deleting /app
-   rm -rf /app
+   echo RESET enviorment variable specified, deleting "$APPDESTINATION"
+   rm -rf "$APPDESTINATION"
 fi
 
 
-if [ ! -f "/app" ]; then
-
-   echo /app does not exists, Will clone git and run BUILD commands:
+if [ ! -f "$APPDESTINATION" ]; then
+   
+   echo "$APPDESTINATION" does not exists, Will clone git and run BUILD commands:
    
    git config --global user.email "you@example.com"
    git config --global user.name "Your Name"
-   git clone $GITURL /app
-   cd /app
+   mkdir -p $APPDESTINATION
+   git clone $GITURL "$APPDESTINATION"
+   cd "$APPDESTINATION"
 
    git checkout $GITBRANCH --recurse-submodules
 
@@ -75,10 +77,10 @@ if [ ! -f "/app" ]; then
    $BUILD9
    $BUILD10
 else
-   echo /app already exists, running REBUILD commands:
-
+   echo "$APPDESTINATION" already exists, will do git: fetch,checkout, and hard reset, then running the REBUILD commands:
+   cd "$APPDESTINATION"
    git fetch origin
-   git checkout -b $GITBRANCH
+   git checkout $GITBRANCH
    git reset --hard origin/$GITBRANCH
 
    $REBUILD1
