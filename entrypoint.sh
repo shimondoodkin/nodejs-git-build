@@ -8,7 +8,7 @@ set +e
 [ -z "${GITBRANCH}" ] && export GITBRANCH="main"
 [ -z "${RESET}"     ] && export RESET=""
 
-[ -z "${BUILD1}"  ] && export BUILD1="npm install"
+[ -z "${BUILD1}"  ] && export BUILD1="yarn install"
 [ -z "${BUILD2}"  ] && export BUILD2=""
 [ -z "${BUILD3}"  ] && export BUILD3=""
 [ -z "${BUILD4}"  ] && export BUILD4=""
@@ -20,7 +20,7 @@ set +e
 [ -z "${BUILD10}" ] && export BUILD10=""
 
 
-[ -z "${REBUILD1}"  ] && export REBUILD1="yarn install --production"
+[ -z "${REBUILD1}"  ] && export REBUILD1="yarn install"
 [ -z "${REBUILD2}"  ] && export REBUILD2=""
 [ -z "${REBUILD3}"  ] && export REBUILD3=""
 [ -z "${REBUILD4}"  ] && export REBUILD4=""
